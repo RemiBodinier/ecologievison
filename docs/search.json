@@ -1,0 +1,82 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ecologie spatiale et régime alimentaire d’une espèce en danger critique d’extinction : apports pour la conservation du Vison d’Europe (Mustela lutreola)",
+    "section": "",
+    "text": "Preface\nCe projet de thèse est réalisé par Rémi Bodinier au sein du GREGE (Groupe de Recherche et d’Etude pour la Gestion de l’environnement) en codirection avec le LBBE (Laboratoir de Biométrie et Biologie Evolutive).\nLe but de cette thèse est d’apporter des connaissances sur l’écologie du Vison d’Europe à travers l’occupation de l’espace, l’utisation de l’habitat, le régime alimentaire et les risques de collisions routières. Grâce à cet apport de connaissances, le but de cette thèse est d’améliorer les stratégies de conservation de l’espèce en milieu naturel et de donner des critères pour une futur translocations d’individus dans le milieu naturel.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Méthodologie",
+    "section": "",
+    "text": "2.1 Occupation de l’espace",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html#patrons-de-déplacements",
+    "href": "summary.html#patrons-de-déplacements",
+    "title": "2  Méthodologie",
+    "section": "2.2 Patrons de déplacements",
+    "text": "2.2 Patrons de déplacements",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html#utilisation-de-lhabitat",
+    "href": "summary.html#utilisation-de-lhabitat",
+    "title": "2  Méthodologie",
+    "section": "2.3 Utilisation de l’habitat",
+    "text": "2.3 Utilisation de l’habitat",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html#caractéristiques-des-gîtes",
+    "href": "summary.html#caractéristiques-des-gîtes",
+    "title": "2  Méthodologie",
+    "section": "2.4 Caractéristiques des gîtes",
+    "text": "2.4 Caractéristiques des gîtes",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html#régime-alimentaire",
+    "href": "summary.html#régime-alimentaire",
+    "title": "2  Méthodologie",
+    "section": "2.5 Régime alimentaire",
+    "text": "2.5 Régime alimentaire",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html#risque-de-collisions-routières",
+    "href": "summary.html#risque-de-collisions-routières",
+    "title": "2  Méthodologie",
+    "section": "2.6 Risque de collisions routières",
+    "text": "2.6 Risque de collisions routières",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  }
+]
