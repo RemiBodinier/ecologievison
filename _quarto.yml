@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "Thehgchcse"
+  title: "Ecologie spatiale et régime alimentaire d'une espèce en danger critique d'extinction : apports pour la conservation du Vison d'Europe (*Mustela lutreola*)"
   author: "Rémi Bodinier"
   date: today
   chapters:
