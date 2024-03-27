@@ -1,5 +1,4 @@
 # Preface {.unnumbered}
+Ce projet de thèse est réalisé par Rémi Bodinier au sein du GREGE (Groupe de Recherche et d'Etude pour la Gestion de l'environnement)
+en codirection avec le LBBE (Laboratoir de Biométrie et Biologie Evolutive)
 
-This is a Quarto book.
-
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
