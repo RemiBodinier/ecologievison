@@ -8,8 +8,8 @@ book:
   - name: Rémi Bodinier
     affiliation: GREGE, LBBE
     roles:
-      - Writing
-      - Doing the study
+       - conceptualization
+       - methodology
     email: 
       - rbodinier.grege@orange.fr
       - remi.bodinier@etu.univ-lyon1.fr
