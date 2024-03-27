@@ -1,10 +1,11 @@
 project:
   type: book
+  output-dir: docs
 
 book:
   title: "These"
-  author: "Norah Jones"
-  date: "27/03/2024"
+  author: "Rémi Bodinier"
+  date: today
   chapters:
     - index.qmd
     - intro.qmd
