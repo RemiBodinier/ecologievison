@@ -1,6 +1,6 @@
 # Preface {.unnumbered}
-Ce projet de thèse est réalisé par Rémi Bodinier au sein du GREGE (Groupe de Recherche et d'Etude pour la Gestion de l'environnement)
-en codirection avec le LBBE (Laboratoir de Biométrie et Biologie Evolutive).
+Ce projet de thèse est réalisé par Rémi Bodinier au sein du GREGE (Groupe de Recherche et d'Etude pour la Gestion de l'Environnement)
+en co-direction avec le LBBE (Laboratoire de Biométrie et Biologie Evolutive).
 
-Le but de cette thèse est d'apporter des connaissances sur l'écologie du Vison d'Europe à travers l'occupation de l'espace, l'utisation de l'habitat, le régime alimentaire et les risques de collisions routières. Grâce à cet apport de connaissances, le but de cette thèse est d'améliorer les stratégies de conservation de l'espèce en milieu naturel et de donner des critères pour une futur translocations d'individus dans le milieu naturel.
+Le but de cette thèse est d'apporter des connaissances sur l'écologie du Vison d'Europe à travers l'occupation de l'espace, l'utisation de l'habitat, le régime alimentaire et les risques de collisions routières. Grâce à cet apport de connaissances, le but de cette thèse est d'améliorer les stratégies de conservation de l'espèce en milieu naturel et de donner des critères pour de futures translocations d'individus dans le milieu naturel.
 

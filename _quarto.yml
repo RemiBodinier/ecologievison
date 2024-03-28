@@ -7,9 +7,6 @@ book:
   author: 
   - name: Rémi Bodinier
     affiliation: GREGE, LBBE
-    roles:
-       - conceptualization
-       - methodology
     email: 
       - rbodinier.grege@orange.fr
       - remi.bodinier@etu.univ-lyon1.fr
