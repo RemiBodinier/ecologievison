@@ -14,10 +14,20 @@ book:
   date: today
   chapters:
     - index.qmd
-    - intro.qmd
-    - methodo.qmd
-    - resultats.qmd
-    - references.qmd
+    - part: j02intro.qmd
+      chapters: 
+        - j03intro_article.qmd
+        - j04synt_biblio.qmd
+    - part: j05methodo.qmd
+      chapters: 
+        - j06etude.qmd
+        - j07met_deb_these.qmd
+        - j08avance_habit.qmd
+        - j09avance_DV.qmd
+    - part: j10resultats.qmd
+      chapters: 
+        - j11DV.qmd
+    - j12references.qmd
 
 bibliography: references.bib
 
