@@ -22,8 +22,8 @@ book:
       chapters: 
         - j06etude.qmd
         - j07met_deb_these.qmd
-        - j08avance_habit.qmd
-        - j09avance_DV.qmd
+        - j08met_DV.qmd
+        - j09met_habit.qmd
     - part: j10resultats.qmd
       chapters: 
         - j11DV.qmd
