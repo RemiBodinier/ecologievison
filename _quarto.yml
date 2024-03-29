@@ -3,7 +3,8 @@ project:
   output-dir: docs
 
 book:
-  title: "Ecologie spatiale et régime alimentaire d'une espèce en danger critique d'extinction : apports pour la conservation du Vison d'Europe (*Mustela lutreola*)."
+  title: "Ecologie spatiale et régime alimentaire d'une espèce en danger critique d'extinction : apports pour la conservation du Vison d'Europe (*Mustela lutreola*) en France."
+  cover-image: cover.jpg
   author: 
   - name: Rémi Bodinier
     affiliation: GREGE, LBBE
