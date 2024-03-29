@@ -204,6 +204,13 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#objectifs-de-létude" id="toc-objectifs-de-létude" class="nav-link active" data-scroll-target="#objectifs-de-létude"><span class="header-section-number">5.1</span> Objectifs de l’étude</a></li>
+  <li><a href="#méthodes-utilisées" id="toc-méthodes-utilisées" class="nav-link" data-scroll-target="#méthodes-utilisées"><span class="header-section-number">5.2</span> Méthodes utilisées</a>
+  <ul class="collapse">
+  <li><a href="#km-linéaire" id="toc-km-linéaire" class="nav-link" data-scroll-target="#km-linéaire"><span class="header-section-number">5.2.1</span> Km linéaire</a></li>
+  <li><a href="#km-linéaire-tampon" id="toc-km-linéaire-tampon" class="nav-link" data-scroll-target="#km-linéaire-tampon"><span class="header-section-number">5.2.2</span> Km linéaire tampon</a></li>
+  <li><a href="#kernel" id="toc-kernel" class="nav-link" data-scroll-target="#kernel"><span class="header-section-number">5.2.3</span> Kernel</a></li>
+  </ul></li>
+  <li><a href="#comparaison-des-méthodes" id="toc-comparaison-des-méthodes" class="nav-link" data-scroll-target="#comparaison-des-méthodes"><span class="header-section-number">5.3</span> Comparaison des méthodes</a></li>
   </ul>
 </nav>
     </div>
@@ -233,7 +240,28 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="5.1" class="anchored" data-anchor-id="objectifs-de-létude"><span class="header-section-number">5.1</span> Objectifs de l’étude</h2>
 <p>Cette étude a pour objectif de connaître plus en détails les modalités d’occupation de l’espace, ainsi que d’établir des variables explicatives pour les axes suivant.</p>
 <p>Qui plus est, les objectifs de cette partie devront répondre au but de la thèse qui est d’améliorer la stratégie de conservation des individus dans le milieu naturel ainsi que de dresser des critères pour l’établissement de zones propices à la translocation d’individus d’élevage dans le milieu naturel.</p>
-<p>Ainsi les objectifs seront de : - Connaître les surfaces ou les</p>
+<p>Ainsi les objectifs seront de : - Connaître les surfaces ou les linéaires à protéger lors de la conservation de l’espèce ainsi que les espaces prévisionnels à couvrir lors du relâcher des individus transloqués. - Identifier des zones plus utilisées que d’autres au sein du domaine vital, ce qui est appelé “zones coeurs” dans la littérature. Ces zones coeurs seront utilisées dans la partie sur l’utilisation des habitats, en comparant les habitats en et hors zones coeurs.</p>
+<p>POur remplir ces objectifs, plusieurs méthodes sont prévues.</p>
+</section>
+<section id="méthodes-utilisées" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="méthodes-utilisées"><span class="header-section-number">5.2</span> Méthodes utilisées</h2>
+<section id="km-linéaire" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="km-linéaire"><span class="header-section-number">5.2.1</span> Km linéaire</h3>
+<p>Pour la plupart des études ayant portées sur des espèces inféodés à un milieu linéaire comme le sont les cours d’eau, le domaine vital est souvent calculé comme la distance de cours d’eau entre la localisation la plus en aval et celle la plus en amont. Les zones coeurs pourraient être des portions de ce linéaire où l’individu s’arrête plus souvent que sur d’autres. POur les identifier, il faut calculer la distance entre un des points extrêmes (localisation la plus en aval ou la plus en amont) et chacune des localisations, via le cours d’eau. Il faut ensuite observer la distribution de ces distances. La courbe que la distribution va former devrait présenter un ou des pics pouvant être associés à des zones coeurs. Par exemple, si la distribution forme une coure de Gauss, la zone coeur est compris entre la distance au premier quartile et la distance au troisième quartile.</p>
+<p>Cependant cette méthode ne permettra pas de pouvoir comparer des habitats puisu’il est associé à une seul type d’habitat : le cours d’eau. Ils font donc alors trouver une méthode surfacique.</p>
+</section>
+<section id="km-linéaire-tampon" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="km-linéaire-tampon"><span class="header-section-number">5.2.2</span> Km linéaire tampon</h3>
+<p>On pourrait réutiliser le cours d’eau en la localisatio la plus en aval et celle la plus en amont, en ajoutant un tampon au cours d’eau. Ce tampon serait créé en mesurant toutes les distances entre les localisations et le cours d’eau le plus proche. La valeur du tampon est alors la distance maximale entre les localisations et le cours d’eau, par individu.</p>
+</section>
+<section id="kernel" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="kernel"><span class="header-section-number">5.2.3</span> Kernel</h3>
+<p>Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel. En prenant comme zone coeur les kernel 50%. Cependant, la configuration des cours d’eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette techniques. Il faut donc utiliser une variante du Kernel qui permettra de prendre en compte la réalité du terrain et les spécificités écologiques du Vison d’Europe.</p>
+</section>
+</section>
+<section id="comparaison-des-méthodes" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="comparaison-des-méthodes"><span class="header-section-number">5.3</span> Comparaison des méthodes</h2>
+<p>Les méthodes seront toutes appliquées à notre jeu de données. De plus les déterminismes de la taille du domaine vital seront analysés pour chacune des méthodes. Ainsi il faudra observe si ce sont toujours les mêmes déterminismes qui influencent la taille du domain vital. De plus, avoir plusieurs méthodes de modélisation du domaine vital permettra aussi d’estimer celui-ci comme un intervalle entre deux surfaces et pas comme une surface “fixe”.</p>
 
 
 </section>

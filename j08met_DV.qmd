@@ -7,4 +7,28 @@ Cette étude a pour objectif de connaître plus en détails les modalités d'occ
 Qui plus est, les objectifs de cette partie devront répondre au but de la thèse qui est d'améliorer la stratégie de conservation des individus dans le milieu naturel ainsi que de dresser des critères pour l'établissement de zones propices à la translocation d'individus d'élevage dans le milieu naturel.
 
 Ainsi les objectifs seront de :
-- Connaître les surfaces ou les 
+- Connaître les surfaces ou les linéaires à protéger lors de la conservation de l'espèce ainsi que les espaces prévisionnels à couvrir lors du relâcher des individus transloqués. 
+- Identifier des zones plus utilisées que d'autres au sein du domaine vital, ce qui est appelé "zones coeurs" dans la littérature. Ces zones coeurs seront utilisées dans la partie sur l'utilisation des habitats, en comparant les habitats en et hors zones coeurs. 
+
+POur remplir ces objectifs, plusieurs méthodes sont prévues.
+
+## Méthodes utilisées
+
+### Km linéaire
+
+Pour la plupart des études ayant portées sur des espèces inféodés à un milieu linéaire comme le sont les cours d'eau, le domaine vital est souvent calculé comme la distance de cours d'eau entre la localisation la plus en aval et celle la plus en amont.
+Les zones coeurs pourraient être des portions de ce linéaire où l'individu s'arrête plus souvent que sur d'autres. POur les identifier, il faut calculer la distance entre un des points extrêmes (localisation la plus en aval ou la plus en amont) et chacune des localisations, via le cours d'eau. Il faut ensuite observer la distribution de ces distances. La courbe que la distribution va former devrait présenter un ou des pics pouvant être associés à des zones coeurs. Par exemple, si la distribution forme une coure de Gauss, la zone coeur est compris entre la distance au premier quartile et la distance au troisième quartile.
+
+Cependant cette méthode ne permettra pas de pouvoir comparer des habitats puisu'il est associé à une seul type d'habitat : le cours d'eau. Ils font donc alors trouver une méthode surfacique.
+
+### Km linéaire tampon
+
+On pourrait réutiliser le cours d'eau en la localisatio la plus en aval et celle la plus en amont, en ajoutant un tampon au cours d'eau. Ce tampon serait créé en mesurant toutes les distances entre les localisations et le cours d'eau le plus proche. La valeur du tampon est alors la distance maximale entre les localisations et le cours d'eau, par individu. 
+
+### Kernel
+
+Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel. En prenant comme zone coeur les kernel 50%. Cependant, la configuration des cours d'eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette techniques. Il faut donc utiliser une variante du Kernel qui permettra de prendre en compte la réalité du terrain et les spécificités écologiques du Vison d'Europe. 
+
+## Comparaison des méthodes
+
+Les méthodes seront toutes appliquées à notre jeu de données. De plus les déterminismes de la taille du domaine vital seront analysés pour chacune des méthodes. Ainsi il faudra observe si ce sont toujours les mêmes déterminismes qui influencent la taille du domain vital. De plus, avoir plusieurs méthodes de modélisation du domaine vital permettra aussi d'estimer celui-ci comme un intervalle entre deux surfaces et pas comme une surface "fixe".
