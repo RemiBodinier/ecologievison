@@ -37,6 +37,8 @@ format:
     theme: cosmo
   pdf:
     documentclass: scrreprt
+  docx :
+    reference-doc: custom-reference.docx
 
 
 
