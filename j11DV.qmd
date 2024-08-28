@@ -1,1 +1,5 @@
 # Résultats de l'étude de l'occupation de l'espace
+
+## Choix des individus
+
+Finalement ce sont 17 individus/année qui ont été sélectionnés, sur les 25 disponibles. En Charente, 5 individus années ont été sélectionnés : Badu les deux ans, Gwenn, Mellea année 1 et Maya année 1. En Charente-Maritime les quatre individus suivis sont utilisés pour les analyses. Dans les marais d'Orx, seul V3O est sélectionné. Enfin pour les individus sur linéaire dans les Landes de Gascogne, sont sélectionnés : V2C les deux ans, V3E, V3C, V4C, V5C année 1 et V10C.
