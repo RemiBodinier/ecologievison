@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "Ecologie spatiale"
+  title: "These Vison"
   cover-image: cover.jpg
   author: 
   - name: Rémi Bodinier
