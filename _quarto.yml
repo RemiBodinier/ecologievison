@@ -37,7 +37,6 @@ format:
     theme: cosmo
   pdf:
     documentclass: scrreprt
-  docx : default
-
-
-
+    output-file: "Ecologie_spatiale.pdf"
+  docx :
+    output-file: "Ecologie_spatiale.docx"
