@@ -1,4 +1,4 @@
-# Preface {.unnumbered}
+# Préface {.unnumbered}
 Ce projet de thèse est réalisé par Rémi Bodinier au sein du GREGE (Groupe de Recherche et d'Etude pour la Gestion de l'Environnement)
 en co-direction avec le LBBE (Laboratoire de Biométrie et Biologie Evolutive).
 
