@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -69,6 +103,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -208,9 +271,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#choix-des-individus" id="toc-choix-des-individus" class="nav-link" data-scroll-target="#choix-des-individus"><span class="header-section-number">5.2</span> Choix des individus</a></li>
   <li><a href="#méthodes-utilisées" id="toc-méthodes-utilisées" class="nav-link" data-scroll-target="#méthodes-utilisées"><span class="header-section-number">5.3</span> Méthodes utilisées</a>
   <ul class="collapse">
-  <li><a href="#km-linéaire-tampon" id="toc-km-linéaire-tampon" class="nav-link" data-scroll-target="#km-linéaire-tampon"><span class="header-section-number">5.3.1</span> Km linéaire tampon</a></li>
-  <li><a href="#kernel" id="toc-kernel" class="nav-link" data-scroll-target="#kernel"><span class="header-section-number">5.3.2</span> Kernel</a></li>
-  <li><a href="#kernel-de-clément" id="toc-kernel-de-clément" class="nav-link" data-scroll-target="#kernel-de-clément"><span class="header-section-number">5.3.3</span> Kernel de Clément</a></li>
+  <li><a href="#méthodes-probabilistes" id="toc-méthodes-probabilistes" class="nav-link" data-scroll-target="#méthodes-probabilistes"><span class="header-section-number">5.3.1</span> Méthodes probabilistes</a></li>
+  <li><a href="#méthodes-écologiques" id="toc-méthodes-écologiques" class="nav-link" data-scroll-target="#méthodes-écologiques"><span class="header-section-number">5.3.2</span> Méthodes écologiques</a></li>
   </ul></li>
   <li><a href="#comparaison-des-méthodes" id="toc-comparaison-des-méthodes" class="nav-link" data-scroll-target="#comparaison-des-méthodes"><span class="header-section-number">5.4</span> Comparaison des méthodes</a></li>
   </ul>
@@ -262,8 +324,44 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="méthodes-utilisées" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="méthodes-utilisées"><span class="header-section-number">5.3</span> Méthodes utilisées</h2>
-<section id="km-linéaire-tampon" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="km-linéaire-tampon"><span class="header-section-number">5.3.1</span> Km linéaire tampon</h3>
+<p>Les méthodes sont séparées en deux parties. D’une part les méthodes basées sur les données elles-mêmes, qui seront appelés “méthodes écologiques”. D’autre part les méthodes probabilistes.</p>
+<section id="méthodes-probabilistes" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="méthodes-probabilistes"><span class="header-section-number">5.3.1</span> Méthodes probabilistes</h3>
+<section id="kernel" class="level4" data-number="5.3.1.1">
+<h4 data-number="5.3.1.1" class="anchored" data-anchor-id="kernel"><span class="header-section-number">5.3.1.1</span> Kernel</h4>
+<p>Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel, en prenant comme zone cœur les kernel 50%. Cependant, la configuration des cours d’eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette technique, et en prenant comme valeur du facteur de lissage une valeur de référence. Il faut donc jouer avec ce facteur de lissage afin de pouvoir mieux coller à la réalité du terrain et les spécificités écologiques du Vison d’Europe. La valeur du facteur de lissage est spécifique à chaque individus et détaillée dans la partie résultat.</p>
+<p>Les Kernel ont été modélisés sur R en utilisant les packages <code>sf</code>, <code>sp</code>, <code>adehabitatHR</code> selon ce script :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#Lire le shapefile des points</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pt_indiv &lt;- st_read("Chemin_pour_trouver_ta_couche_de_points/Loc_indiv.shp")</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>#Créer une grille de densité</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>grid_indiv &lt;- adehabitatHR:::.makegridUD(st_coordinates(pt_indiv), 1000, 1)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gri_indiv &lt;- SpatialPixelsDataFrame(grid_indiv,data.frame(distance=1:length(grid_indiv)))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>#Calculer le Kernel UD avec un facteur de lissage h = 'à définir'</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>kuo_indiv &lt;- kernelUD(SpatialPointsDataFrame(SpatialPoints(st_coordinates(pt_indiv)),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                                            as.data.frame(pt_indiv)<span class="co">[</span><span class="ot">,1:2</span><span class="co">]</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                     grid=as(gri_indiv,"SpatialPixelsDataFrame"), h=)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>#Calculer le domaine vital à 95% et enregistrer en shapefile</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>volo_indiv &lt;- getverticeshr(getvolumeUD(kuo_indiv), 95)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>shpindiv95&lt;- st_as_sf(volo_indiv)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>st_write(shpindiv95, dsn = "Chemin_ou_je_veux_mettre_mon_Kernel95/Kernel95.shp", driver = "ESRI Shapefile")</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>#Calculer le domaine vital à 50% et enregistrer en shapefile</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>volb_indiv &lt;- getverticeshr(getvolumeUD(kuo_indiv), 50)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>shpindiv50&lt;- st_as_sf(volb_indiv)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>st_write(shpindiv50, dsn = "Chemin_ou_je_veux_mettre_mon_Kernel50/Kernel50.shp", driver = "ESRI Shapefile")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="kernel-de-clément" class="level4" data-number="5.3.1.2">
+<h4 data-number="5.3.1.2" class="anchored" data-anchor-id="kernel-de-clément"><span class="header-section-number">5.3.1.2</span> Kernel de Clément</h4>
+<p>La méthode du Kernel semble pouvoir être manipulée de manière à ce que la courbe créée par le facteur de lissage soit asymétrique et ainsi que le domaine vital s’allonge dans le même sens que le cours d’eau et s’aplatit en s’en éloignant. Cette méthode permettrait de ne pas surestimer le domaine vital au niveau des localisations les plus éloignées des cours d’eau.</p>
+</section>
+</section>
+<section id="méthodes-écologiques" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="méthodes-écologiques"><span class="header-section-number">5.3.2</span> Méthodes écologiques</h3>
+<section id="km-linéaire-tampon" class="level4" data-number="5.3.2.1">
+<h4 data-number="5.3.2.1" class="anchored" data-anchor-id="km-linéaire-tampon"><span class="header-section-number">5.3.2.1</span> Km linéaire tampon</h4>
 <p>Pour chaque individus, on coupe l’ensemble des cours d’eau au niveau des localisations extrêmes (la plus en aval ou la plus en amont). On mesure ensuite la distance entre toutes lesl ocalisations et le cours d’eau le plus proche. On crée ensuite autour des cours d’eau un tampon avec comme valeur la distance maximale entre les localisations et les cours d’eau. Comme le Vison d’Europe peut utiliser l’ensemble de l’espace compris entre les cours d’eau, on crée également un tampon “rempli”.</p>
 <p>En ce qui concerne les zones cœurs, on les crée en utilisant l’axe médian de la zone humide. On projette sur cette axe les localisations. On choisit comme localisation de référence une des deux extrêmes. On mesure la longueur par l’axe médian entre le point de référence et chaque projeté. On modélise la courbe de ces distances, du point de référence jusqu’au projeté le plus éloigné. On identifie les zones cœurs comme des zones où un nombre conséquent de localisations forme un plateau. On coupe ensuite le tampon au niveau des limites des plateaux.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -279,14 +377,25 @@ Problème en zone de marais
 <p>Il y a un problème quant à la construction en zone de marais puisque la zones humide étant elle-même surfacique, comment y construit-on l’axe médian ?</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Révision de la méthode
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cette méthode n’est pas aboutit. D’une part, on utilise l’axe médian de la zone humide alors que le domaine vital n’est pas uniquement dans la zone humide. On devrait alors utiliser l’axe médian des cours d’eau. De plus, on coupe les zones cœurs au niveau de l’amont et de l’aval, mais on ne redéfinit pas des limites en s’éloignant du cours d’eau. On devrait, pour les localisations correspondant à un plateau, mesurer la distance maximale aux cours d’eau et refaire un tampon autour d’eux. Qui plus est, la méthode actuelle estime que le vison ne peut pas être plus loin du cours d’eau que la distance maximale alors que rien ne l’en empâche. Il faudrait alors faire un tampon également autour des localisations pour simuler cette possibilité. Enfin, on crée un domaine vital 100% qu’on compare à un Kernel 95% ce qui n’est pas logique. On pourrait prendre comme valeur de tampon la distance représentant 95% de la distance max.</p>
+</div>
+</div>
 </section>
-<section id="kernel" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="kernel"><span class="header-section-number">5.3.2</span> Kernel</h3>
-<p>Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel, en prenant comme zone cœur les kernel 50%. Cependant, la configuration des cours d’eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette technique, et en prenant comme valeur du facteur de lissage une valeur de référence. Il faut donc jouer avec ce facteur de lissage afin de pouvoir mieux coller à la réalité du terrain et les spécificités écologiques du Vison d’Europe. La valeur du facteur de lissage est spécifique à chaque individus et détaillée dans la partie résultat.</p>
+<section id="domaine-vital-maille" class="level4" data-number="5.3.2.2">
+<h4 data-number="5.3.2.2" class="anchored" data-anchor-id="domaine-vital-maille"><span class="header-section-number">5.3.2.2</span> Domaine vital maille</h4>
+<p>Une autre méthode basée sur les localisations serait la modélisation de mailles dont les mesures dépendent de la distance entre les localisations. On mesure pour tous les individus la distance euclidienne entre une localisation et la prochaine temporellement. On choisit ensuite une valeur de référence qui peut être : la distance médiane entre localisations pour l’individu, la distance moyenne entre localisations pour l’individu, la distance médiane entre localisations pour tous les individus, la distance moyenne entre localisations pour tous les individus. On construit ensuite un maillage et le domaine vital est définit par les mailles contenant au moins une localisation.</p>
+<p>La zone cœur est ensuite définit comme une zone dans laquelle il y a statistiquement plus de localisations que dans les autres mailles. La différence statistique peut être calculé par un test du <span class="math inline">\(X²\)</span>.</p>
 </section>
-<section id="kernel-de-clément" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="kernel-de-clément"><span class="header-section-number">5.3.3</span> Kernel de Clément</h3>
-<p>La méthode du Kernel semble pouvoir être manipulée de manière à ce que la courbe créée par le facteur de lissage soit asymétrique et ainsi que le domaine vital s’allonge dans le même sens que le cours d’eau et s’aplatit en s’en éloignant. Cette méthode permettrait de ne pas surestimer le domaine vital au niveau des localisations les plus éloignées des cours d’eau.</p>
 </section>
 </section>
 <section id="comparaison-des-méthodes" class="level2" data-number="5.4">

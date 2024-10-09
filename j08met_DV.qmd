@@ -26,7 +26,50 @@ Une fois ces modélisations faites, on dessine pour chaque individus la courbe r
 
 ## Méthodes utilisées
 
-### Km linéaire tampon
+Les méthodes sont séparées en deux parties. D'une part les méthodes basées sur les données elles-mêmes, qui seront appelés "méthodes écologiques". D'autre part les méthodes probabilistes.  
+
+### Méthodes probabilistes
+
+#### Kernel
+
+Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel, en prenant comme zone cœur les kernel 50%. Cependant, la configuration des cours d'eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette technique, et en prenant comme valeur du facteur de lissage une valeur de référence. Il faut donc jouer avec ce facteur de lissage afin de pouvoir mieux coller à la réalité du terrain et les spécificités écologiques du Vison d'Europe. La valeur du facteur de lissage est spécifique à chaque individus et détaillée dans la partie résultat. 
+
+Les Kernel ont été modélisés sur R en utilisant les packages `sf`,  `sp`, `adehabitatHR` selon ce script : 
+
+
+```` markdown
+#Lire le shapefile des points
+pt_indiv <- st_read("Chemin_pour_trouver_ta_couche_de_points/Loc_indiv.shp")
+
+#Créer une grille de densité
+grid_indiv <- adehabitatHR:::.makegridUD(st_coordinates(pt_indiv), 1000, 1)
+gri_indiv <- SpatialPixelsDataFrame(grid_indiv,data.frame(distance=1:length(grid_indiv)))
+
+#Calculer le Kernel UD avec un facteur de lissage h = 'à définir'
+kuo_indiv <- kernelUD(SpatialPointsDataFrame(SpatialPoints(st_coordinates(pt_indiv)),
+                                            as.data.frame(pt_indiv)[,1:2]),
+                     grid=as(gri_indiv,"SpatialPixelsDataFrame"), h=)
+
+#Calculer le domaine vital à 95% et enregistrer en shapefile
+volo_indiv <- getverticeshr(getvolumeUD(kuo_indiv), 95)
+shpindiv95<- st_as_sf(volo_indiv)
+st_write(shpindiv95, dsn = "Chemin_ou_je_veux_mettre_mon_Kernel95/Kernel95.shp", driver = "ESRI Shapefile")
+
+#Calculer le domaine vital à 50% et enregistrer en shapefile
+volb_indiv <- getverticeshr(getvolumeUD(kuo_indiv), 50)
+shpindiv50<- st_as_sf(volb_indiv)
+st_write(shpindiv50, dsn = "Chemin_ou_je_veux_mettre_mon_Kernel50/Kernel50.shp", driver = "ESRI Shapefile")
+
+````
+
+
+#### Kernel de Clément
+
+La méthode du Kernel semble pouvoir être manipulée de manière à ce que la courbe créée par le facteur de lissage soit asymétrique et ainsi que le domaine vital s'allonge dans le même sens que le cours d'eau et s'aplatit en s'en éloignant. Cette méthode permettrait de ne pas surestimer le domaine vital au niveau des localisations les plus éloignées des cours d'eau.
+
+### Méthodes écologiques
+
+#### Km linéaire tampon
 
 Pour chaque individus, on coupe l'ensemble des cours d'eau au niveau des localisations extrêmes (la plus en aval ou la plus en amont). On mesure ensuite la distance entre toutes lesl ocalisations et le cours d'eau le plus proche. On crée ensuite autour des cours d'eau un tampon avec comme valeur la distance maximale entre les localisations et les cours d'eau. Comme le Vison d'Europe peut utiliser l'ensemble de l'espace compris entre les cours d'eau, on crée également un tampon "rempli".
 
@@ -37,13 +80,16 @@ En ce qui concerne les zones cœurs, on les crée en utilisant l'axe médian de 
 Il y a un problème quant à la construction en zone de marais puisque la zones humide étant elle-même surfacique, comment y construit-on l'axe médian ?
 :::
 
-### Kernel
+:::{.callout-note}
+## Révision de la méthode
+Cette méthode n'est pas aboutit. D'une part, on utilise l'axe médian de la zone humide alors que le domaine vital n'est pas uniquement dans la zone humide. On devrait alors utiliser l'axe médian des cours d'eau. De plus, on coupe les zones cœurs au niveau de l'amont et de l'aval, mais on ne redéfinit pas des limites en s'éloignant du cours d'eau. On devrait, pour les localisations correspondant à un plateau, mesurer la distance maximale aux cours d'eau et refaire un tampon autour d'eux. Qui plus est, la méthode actuelle estime que le vison ne peut pas être plus loin du cours d'eau que la distance maximale alors que rien ne l'en empâche. Il faudrait alors faire un tampon également autour des localisations pour simuler cette possibilité. Enfin, on crée un domaine vital 100% qu'on compare à un Kernel 95% ce qui n'est pas logique. On pourrait prendre comme valeur de tampon la distance représentant 95% de la distance max.   
+:::
 
-Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel, en prenant comme zone cœur les kernel 50%. Cependant, la configuration des cours d'eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette technique, et en prenant comme valeur du facteur de lissage une valeur de référence. Il faut donc jouer avec ce facteur de lissage afin de pouvoir mieux coller à la réalité du terrain et les spécificités écologiques du Vison d'Europe. La valeur du facteur de lissage est spécifique à chaque individus et détaillée dans la partie résultat. 
+#### Domaine vital maille
 
-### Kernel de Clément
+Une autre méthode basée sur les localisations serait la modélisation de mailles dont les mesures dépendent de la distance entre les localisations. On mesure pour tous les individus la distance euclidienne entre une localisation et la prochaine temporellement. On choisit ensuite une valeur de référence qui peut être : la distance médiane entre localisations pour l'individu, la distance moyenne entre localisations pour l'individu, la distance médiane entre localisations pour tous les individus, la distance moyenne entre localisations pour tous les individus. On construit ensuite un maillage et le domaine vital est définit par les mailles contenant au moins une localisation. 
 
-La méthode du Kernel semble pouvoir être manipulée de manière à ce que la courbe créée par le facteur de lissage soit asymétrique et ainsi que le domaine vital s'allonge dans le même sens que le cours d'eau et s'aplatit en s'en éloignant. Cette méthode permettrait de ne pas surestimer le domaine vital au niveau des localisations les plus éloignées des cours d'eau.
+La zone cœur est ensuite définit comme une zone dans laquelle il y a statistiquement plus de localisations que dans les autres mailles. La différence statistique peut être calculé par un test du $X²$. 
 
 ## Comparaison des méthodes
 
