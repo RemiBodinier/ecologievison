@@ -1,4 +1,4 @@
-# Méthodologie de l'étude de l'occupation de l'espace
+# Occupation de l'espace
 
 ## Objectifs de l'étude
 
@@ -15,45 +15,35 @@ Pour remplir ces objectifs, plusieurs méthodes sont prévues.
 
 ## Choix des individus
 
-Tous les individus/années suivis par radiopistage ne seront pas utilisés pour les analyses sur le domaine vital. Pour sélectionner les individus nous avons commencé par modéliser des MCPs pour chaque individu. Ces MCPs ont été construit selon le protocole suivant :
+Tous les individus/années suivis par radiopistage ne seront pas utilisés pour les analyses sur le domaine vital. Pour sélectionner les individus nous avons commencé par modéliser des MCPs pour chaque individu. Ces MCPs ont été construit selon le protocole suivant, pour chaque individu :
 
 - 10 localisations d'un individu sont prises au hasard et on construit le MCP avec ces 10 localisations.
-- Pour le même individu on retire au hasard 10 localisations, et ce 50 fois, en construisant à chaque fois le MCP correspondant.
+- Pour le même individu on tire à nouveau au hasard 10 localisations, et ce 50 fois, en construisant à chaque fois le MCP correspondant.
 - On fait la moyenne de taille du MCP à partir des 50 modélisations.
 - On répète la création de MCP à partir de x localisations, x allant de 10 en 10 jusqu'à la dizaine inférieure au nombre maximal de localisations. 
-- On fait ça pour tous les individus.
 
-Une fois ces modélisations faites on dessine pour chaque individus la courbe représentant la taille moyenne du domaine vital en fonction du nombre de localisations aléatoires. On regarde alors si cette courbe forme un plateau au fur et à mesure que le nombre de localisations augmente. Si c'est le cas, les individus sont automatiquement gardés pour l'analyse. Pour les individus qui ont atteint l'asymptote, on représente aussi le ln de la surface en fonction du ln du nombre de localisation. On crée ensuite la courbe de tendance avec l'équation. On calcule enfin le nombre de localisations nécessaires pour atteindre 90% du domaine vital. On calcule la médiane du nombre de localisations nécessaires pour tous les individus ayant atteint l'asymptote et cette médiane nous donne le nombre de localisations nécessaires pour sélectionner les individus n'ayant pas atteint l'asymptote.
+Une fois ces modélisations faites, on dessine pour chaque individus la courbe représentant la taille moyenne du domaine vital en fonction du nombre de localisations. On regarde alors si cette courbe forme un plateau au fur et à mesure que le nombre de localisations augmente. Si c'est le cas, les individus sont automatiquement gardés pour l'analyse. Pour les individus qui ont atteint l'asymptote, on représente aussi le ln de la surface en fonction du ln du nombre de localisation. On crée ensuite la courbe de tendance avec l'équation. On calcule enfin le nombre de localisations nécessaires pour atteindre 90% du domaine vital. On calcule la médiane du nombre de localisations nécessaires pour tous les individus ayant atteint l'asymptote et cette médiane nous donne le nombre de localisations nécessaires pour sélectionner les individus n'ayant pas atteint l'asymptote.
 
 ## Méthodes utilisées
 
-### Km linéaire
-
-Pour la plupart des études ayant portées sur des espèces inféodées à un milieu linéaire comme c'est le cas avec les espèces évoluant le long des cours d'eau comme le Vison d'Europe, le domaine vital est souvent calculé comme la distance de cours d'eau entre la localisation la plus en aval et celle la plus en amont.
-Les zones cœurs pourraient être des portions de ce linéaire où l'individu s'arrête plus souvent que sur d'autres. Pour les identifier, il faut calculer la distance entre un des points extrêmes (localisation la plus en aval ou la plus en amont) et chacune des localisations, via le cours d'eau. Il faut ensuite observer la distribution de ces distances. La courbe que la distribution va former devrait présenter un ou des pics pouvant être associés à des zones cœurs. Par exemple, si la distribution forme une courbe de Gauss, la zone cœur est compris entre la distance au premier quartile et la distance au troisième quartile.
-
-Cependant cette méthode ne permettra pas de pouvoir comparer des habitats puisque le domaine vital est alors associé à un seul type d'habitat : le cours d'eau. Il faut donc trouver une méthode surfacique.
-
 ### Km linéaire tampon
 
-On pourrait réutiliser le cours d'eau entre la localisation la plus en aval et celle la plus en amont, en ajoutant un tampon au cours d'eau, voire en plus autour de chaque localisation. Ce tampon serait créé en mesurant toutes les distances entre les localisations et le cours d'eau le plus proche. La valeur du tampon est alors la distance maximale entre les localisations et le cours d'eau, par individu. 
+Pour chaque individus, on coupe l'ensemble des cours d'eau au niveau des localisations extrêmes (la plus en aval ou la plus en amont). On mesure ensuite la distance entre toutes lesl ocalisations et le cours d'eau le plus proche. On crée ensuite autour des cours d'eau un tampon avec comme valeur la distance maximale entre les localisations et les cours d'eau. Comme le Vison d'Europe peut utiliser l'ensemble de l'espace compris entre les cours d'eau, on crée également un tampon "rempli".
 
-### Linéaire de zone humide
+En ce qui concerne les zones cœurs, on les crée en utilisant l'axe médian de la zone humide. On projette sur cette axe les localisations. On choisit comme localisation de référence une des deux extrêmes. On mesure la longueur par l'axe médian entre le point de référence et chaque projeté. On modélise la courbe de ces distances, du point de référence jusqu'au projeté le plus éloigné. On identifie les zones cœurs comme des zones où un nombre conséquent de localisations forme un plateau. On coupe ensuite le tampon au niveau des limites des plateaux. 
 
-Une autre manière de modéliser le domaine vital du Vison serait de vérifier que toutes les localisations sont bien à l'intérieur des limites de la zone humide. Le domaine vital du Vison d'Europe serait alors les limites de la zone humide coupées entre la localisation la plus en amont et celle la plus en aval. La zone cœur pourrait alors être calculé comme la zone humide autour des portions du cours d'eau avec le plus de localisations (cf la méthode de construction de la zone cœur pour le km linéaire).
+:::{.callout-warning}
+Il y a un problème quant à la construction en zone de marais puisque la zones humide étant elle-même surfacique, comment y construit-on l'axe médian ?
+:::
 
 ### Kernel
 
-Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel, en prenant comme zone cœur les kernel 50%. Cependant, la configuration des cours d'eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette technique, et en prenant comme valeur du facteur de lissage une valeur de référence. Il faut donc jouer avec ce facteur de lissage afin de pouvoir mieux coller à la réalité du terrain et les spécificités écologiques du Vison d'Europe. 
+Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel, en prenant comme zone cœur les kernel 50%. Cependant, la configuration des cours d'eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette technique, et en prenant comme valeur du facteur de lissage une valeur de référence. Il faut donc jouer avec ce facteur de lissage afin de pouvoir mieux coller à la réalité du terrain et les spécificités écologiques du Vison d'Europe. La valeur du facteur de lissage est spécifique à chauqe individus et détaillée dans la partie résultat. 
 
 ### Kernel de Clément
 
 La méthode du Kernel semble pouvoir être manipulée de manière à ce que la courbe créée par le facteur de lissage soit asymétrique et ainsi que le domaine vital s'allonge dans le même sens que le cours d'eau et s'aplatit en s'en éloignant. Cette méthode permettrait de ne pas surestimer le domaine vital au niveau des localisations les plus éloignées des cours d'eau.
 
-### MCP 
-
-Beaucoup d'articles utilisent également les MCP pour définir le domaine vital d'une espèce. Cependant on peut s'attendre à ce que celui-ci soit très surestimé dans le cas du Vison d'Europe car le polygone créé par cette méthode ne prend pas du tout en compte les limites de
-
 ## Comparaison des méthodes
 
-Les méthodes seront toutes appliquées à notre jeu de données. De plus les déterminismes de la taille du domaine vital seront analysés pour chacune des méthodes. Ainsi il faudra observe si ce sont toujours les mêmes déterminismes qui influencent la taille du domaine vital. De plus, avoir plusieurs méthodes de modélisation du domaine vital permettra aussi d'estimer celui-ci comme un intervalle entre deux surfaces et pas comme une surface "fixe".
+Les méthodes seront toutes appliquées à notre jeu de données. De plus les déterminismes de la taille du domaine vital seront analysés pour chacune des méthodes. Ainsi il faudra observer si ce sont toujours les mêmes déterminismes qui influencent la taille du domaine vital. De plus, avoir plusieurs méthodes de modélisation du domaine vital permettra aussi d'estimer celui-ci comme un intervalle entre deux surfaces et pas comme une surface "fixe".  
