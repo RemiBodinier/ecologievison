@@ -33,6 +33,7 @@ Pour chaque individus, on coupe l'ensemble des cours d'eau au niveau des localis
 En ce qui concerne les zones cœurs, on les crée en utilisant l'axe médian de la zone humide. On projette sur cette axe les localisations. On choisit comme localisation de référence une des deux extrêmes. On mesure la longueur par l'axe médian entre le point de référence et chaque projeté. On modélise la courbe de ces distances, du point de référence jusqu'au projeté le plus éloigné. On identifie les zones cœurs comme des zones où un nombre conséquent de localisations forme un plateau. On coupe ensuite le tampon au niveau des limites des plateaux. 
 
 :::{.callout-warning}
+## Problème en zone de marais
 Il y a un problème quant à la construction en zone de marais puisque la zones humide étant elle-même surfacique, comment y construit-on l'axe médian ?
 :::
 
