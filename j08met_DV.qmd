@@ -38,7 +38,7 @@ Il y a un problème quant à la construction en zone de marais puisque la zones 
 
 ### Kernel
 
-Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel, en prenant comme zone cœur les kernel 50%. Cependant, la configuration des cours d'eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette technique, et en prenant comme valeur du facteur de lissage une valeur de référence. Il faut donc jouer avec ce facteur de lissage afin de pouvoir mieux coller à la réalité du terrain et les spécificités écologiques du Vison d'Europe. La valeur du facteur de lissage est spécifique à chauqe individus et détaillée dans la partie résultat. 
+Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel, en prenant comme zone cœur les kernel 50%. Cependant, la configuration des cours d'eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette technique, et en prenant comme valeur du facteur de lissage une valeur de référence. Il faut donc jouer avec ce facteur de lissage afin de pouvoir mieux coller à la réalité du terrain et les spécificités écologiques du Vison d'Europe. La valeur du facteur de lissage est spécifique à chaque individus et détaillée dans la partie résultat. 
 
 ### Kernel de Clément
 
