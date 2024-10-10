@@ -36,6 +36,12 @@ format:
   html:
     theme: cosmo
     css: styles.css
+    number-sections: true
+    fig-numbering: true
   pdf:
     documentclass: scrreprt
-  docx : default
+    number-sections: true
+    fig-numbering: true
+  docx:
+    number-sections: true
+    fig-numbering: true

@@ -2,14 +2,14 @@
 
 ## Site d'étude
 
-Les données proviennent de trois aires d'études différentes :
+Les données proviennent de trois aires d'études différentes (Figure @fig-zone-etude) :
 1. la vallée de la Charente en amont et en aval d’Angoulême dans le département de
 Charente (16), à partir du suivi réalisé dans le cadre du LIFE VISON entre 2020 et 2022 ;
-1. les marais littoraux de Rochefort dans le département de Charente-Maritime (17) à partir
+2. les marais littoraux de Rochefort dans le département de Charente-Maritime (17) à partir
 du suivi réalisé dans le cadre du LIFE VISON entre 2020 et 2022 ;
-1. les rivières des Landes de Gascogne à partir d’individus suivis entre 1996 et 2000.
+3. les rivières des Landes de Gascogne à partir d’individus suivis entre 1996 et 2000.
 
-![Zones de collecte des données.](image/zones_etudes.jpg)
+![Zones de collecte des données.](image/zones_etudes.jpg){#fig-zone-etude}
 
 ## Radiopistage
 
