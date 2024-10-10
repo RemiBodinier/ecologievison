@@ -362,40 +362,53 @@ window.Quarto = {
 <h3 data-number="5.3.2" class="anchored" data-anchor-id="méthodes-écologiques"><span class="header-section-number">5.3.2</span> Méthodes écologiques</h3>
 <section id="km-linéaire-tampon" class="level4" data-number="5.3.2.1">
 <h4 data-number="5.3.2.1" class="anchored" data-anchor-id="km-linéaire-tampon"><span class="header-section-number">5.3.2.1</span> Km linéaire tampon</h4>
-<p>Pour chaque individus, on coupe l’ensemble des cours d’eau au niveau des localisations extrêmes (la plus en aval ou la plus en amont). On mesure ensuite la distance entre toutes les localisations et le cours d’eau le plus proche (Figure <a href="#fig-distance" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-distance</span></a>).</p>
+<p>Pour chaque individus, on coupe l’ensemble des cours d’eau au niveau des localisations extrêmes (la plus en aval ou la plus en amont). On mesure ensuite la distance entre toutes les localisations et le cours d’eau le plus proche (<a href="#fig-distance" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>).</p>
 <div id="fig-distance" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-distance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="image/distance_watercourse.jpg" class="img-fluid figure-img">
+<img src="image/distance_watercourse.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-distance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.1: Distance entre les localisations et le cours d’eau le plus proche.
 </figcaption>
 </figure>
 </div>
-<p>On crée ensuite autour des cours d’eau un tampon avec comme valeur la distance maximale entre les localisations et les cours d’eau (Figure <a href="#fig-ehr-simple" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ehr-simple</span></a>). Comme le Vison d’Europe peut utiliser l’ensemble de l’espace compris entre les cours d’eau, on crée également un tampon “rempli” (Figure <a href="#fig-ehr-rempli" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ehr-rempli</span></a>).</p>
-<p>::: {#fig-EHR layout-ncol = 2}</p>
+<p>On crée ensuite autour des cours d’eau un tampon avec comme valeur la distance maximale entre les localisations et les cours d’eau (<a href="#fig-ehr-simple" class="quarto-xref">Figure&nbsp;<span>5.2 (a)</span></a>). Comme le Vison d’Europe peut utiliser l’ensemble de l’espace compris entre les cours d’eau, on crée également un tampon “rempli” (<a href="#fig-ehr-rempli" class="quarto-xref">Figure&nbsp;<span>5.2 (b)</span></a>).</p>
+<div id="fig-EHR" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-EHR-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-EHR" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-ehr-simple" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-ehr-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="image/EHR.png" class="img-fluid figure-img">
+<img src="image/EHR.png" class="img-fluid figure-img" data-ref-parent="fig-EHR">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ehr-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.2: EHR simple
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ehr-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) EHR simple
 </figcaption>
 </figure>
 </div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-EHR" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-ehr-rempli" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-ehr-rempli-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="image/filled_EHR.png" class="img-fluid figure-img">
+<img src="image/filled_EHR.png" class="img-fluid figure-img" data-ref-parent="fig-EHR">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ehr-rempli-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.3: EHR rempli
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ehr-rempli-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) EHR rempli
 </figcaption>
 </figure>
 </div>
-<p>Domaine vital écologique basé sur la distance aux cours d’eau. :::</p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-EHR-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Domaine vital écologique basé sur la distance aux cours d’eau.
+</figcaption>
+</figure>
+</div>
 <p>En ce qui concerne les zones cœurs, on les crée en utilisant l’axe médian de la zone humide. On projette sur cette axe les localisations. On choisit comme localisation de référence une des deux extrêmes. On mesure la longueur par l’axe médian entre le point de référence et chaque projeté. On modélise la courbe de ces distances, du point de référence jusqu’au projeté le plus éloigné. On identifie les zones cœurs comme des zones où un nombre conséquent de localisations forme un plateau. On coupe ensuite le tampon au niveau des limites des plateaux.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">

@@ -71,13 +71,13 @@ La méthode du Kernel semble pouvoir être manipulée de manière à ce que la c
 
 #### Km linéaire tampon
 
-Pour chaque individus, on coupe l'ensemble des cours d'eau au niveau des localisations extrêmes (la plus en aval ou la plus en amont). On mesure ensuite la distance entre toutes les localisations et le cours d'eau le plus proche (Figure @fig-distance). 
+Pour chaque individus, on coupe l'ensemble des cours d'eau au niveau des localisations extrêmes (la plus en aval ou la plus en amont). On mesure ensuite la distance entre toutes les localisations et le cours d'eau le plus proche (@fig-distance). 
 
-![Distance entre les localisations et le cours d'eau le plus proche.](image/distance_watercourse.jpg){#fig-distance}
+![Distance entre les localisations et le cours d'eau le plus proche.](image/distance_watercourse.png){#fig-distance}
 
-On crée ensuite autour des cours d'eau un tampon avec comme valeur la distance maximale entre les localisations et les cours d'eau (Figure @fig-ehr-simple). Comme le Vison d'Europe peut utiliser l'ensemble de l'espace compris entre les cours d'eau, on crée également un tampon "rempli" (Figure @fig-ehr-rempli).
+On crée ensuite autour des cours d'eau un tampon avec comme valeur la distance maximale entre les localisations et les cours d'eau (@fig-ehr-simple). Comme le Vison d'Europe peut utiliser l'ensemble de l'espace compris entre les cours d'eau, on crée également un tampon "rempli" (@fig-ehr-rempli).
 
-::: {#fig-EHR layout-ncol = 2}
+::: {#fig-EHR layout-ncol=2}
 
 ![EHR simple](image/EHR.png){#fig-ehr-simple}
 
