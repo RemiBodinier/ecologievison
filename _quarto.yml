@@ -2,6 +2,20 @@ project:
   type: book
   output-dir: docs
 
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    number-sections: true
+    fig-numbering: true
+  pdf:
+    documentclass: scrreprt
+    number-sections: true
+    fig-numbering: true
+  docx:
+    number-sections: true
+    fig-numbering: true
+
 book:
   title: "Ecologie spatiale et régime alimentaire du Vison d'Europe (*Mustela lutreola*) en France."
   cover-image: cover.jpg
@@ -32,16 +46,3 @@ book:
 
 bibliography: references.bib
 
-format:
-  html:
-    theme: cosmo
-    css: styles.css
-    number-sections: false
-    fig-numbering: true
-  pdf:
-    documentclass: scrreprt
-    number-sections: false
-    fig-numbering: true
-  docx:
-    number-sections: false
-    fig-numbering: true
