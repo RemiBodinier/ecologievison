@@ -36,12 +36,12 @@ format:
   html:
     theme: cosmo
     css: styles.css
-    number-sections: true
+    number-sections: false
     fig-numbering: true
   pdf:
     documentclass: scrreprt
-    number-sections: true
+    number-sections: false
     fig-numbering: true
   docx:
-    number-sections: true
+    number-sections: false
     fig-numbering: true
