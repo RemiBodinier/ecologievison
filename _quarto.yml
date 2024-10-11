@@ -8,8 +8,7 @@ format:
     css: styles.css
   pdf:
     documentclass: scrreprt
-  docx:
-    reference-doc: custom-reference.docx
+  docx: default
 
 
 book:

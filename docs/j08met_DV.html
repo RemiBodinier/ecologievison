@@ -331,27 +331,27 @@ window.Quarto = {
 <h4 data-number="5.3.1.1" class="anchored" data-anchor-id="kernel"><span class="header-section-number">5.3.1.1</span> Kernel</h4>
 <p>Une méthode de modélisation du domaine vital très utilisée est la méthode des Kernel, en prenant comme zone cœur les kernel 50%. Cependant, la configuration des cours d’eau dans notre étude va fortement surestimer la taille du domaine vital en utilisant cette technique, et en prenant comme valeur du facteur de lissage une valeur de référence. Il faut donc jouer avec ce facteur de lissage afin de pouvoir mieux coller à la réalité du terrain et les spécificités écologiques du Vison d’Europe. La valeur du facteur de lissage est spécifique à chaque individus et détaillée dans la partie résultat.</p>
 <p>Les Kernel ont été modélisés sur R en utilisant les packages <code>sf</code>, <code>sp</code>, <code>adehabitatHR</code> selon ce script :</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#Lire le shapefile des points</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pt_indiv &lt;- st_read("Chemin_pour_trouver_ta_couche_de_points/Loc_indiv.shp")</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Lire le shapefile des points</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pt_indiv <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"Chemin_pour_trouver_ta_couche_de_points/Loc_indiv.shp"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>#Créer une grille de densité</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>grid_indiv &lt;- adehabitatHR:::.makegridUD(st_coordinates(pt_indiv), 1000, 1)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gri_indiv &lt;- SpatialPixelsDataFrame(grid_indiv,data.frame(distance=1:length(grid_indiv)))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Créer une grille de densité</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>grid_indiv <span class="ot">&lt;-</span> adehabitatHR<span class="sc">:::</span><span class="fu">.makegridUD</span>(<span class="fu">st_coordinates</span>(pt_indiv), <span class="dv">1000</span>, <span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gri_indiv <span class="ot">&lt;-</span> <span class="fu">SpatialPixelsDataFrame</span>(grid_indiv,<span class="fu">data.frame</span>(<span class="at">distance=</span><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(grid_indiv)))</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>#Calculer le Kernel UD avec un facteur de lissage h = 'à définir'</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>kuo_indiv &lt;- kernelUD(SpatialPointsDataFrame(SpatialPoints(st_coordinates(pt_indiv)),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                                            as.data.frame(pt_indiv)<span class="co">[</span><span class="ot">,1:2</span><span class="co">]</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                     grid=as(gri_indiv,"SpatialPixelsDataFrame"), h=)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculer le Kernel UD avec un facteur de lissage h = 'à définir'</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>kuo_indiv <span class="ot">&lt;-</span> <span class="fu">kernelUD</span>(<span class="fu">SpatialPointsDataFrame</span>(<span class="fu">SpatialPoints</span>(<span class="fu">st_coordinates</span>(pt_indiv)),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                                            <span class="fu">as.data.frame</span>(pt_indiv)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">grid=</span><span class="fu">as</span>(gri_indiv,<span class="st">"SpatialPixelsDataFrame"</span>), <span class="at">h=</span>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>#Calculer le domaine vital à 95% et enregistrer en shapefile</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>volo_indiv &lt;- getverticeshr(getvolumeUD(kuo_indiv), 95)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>shpindiv95&lt;- st_as_sf(volo_indiv)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>st_write(shpindiv95, dsn = "Chemin_ou_je_veux_mettre_mon_Kernel95/Kernel95.shp", driver = "ESRI Shapefile")</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculer le domaine vital à 95% et enregistrer en shapefile</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>volo_indiv <span class="ot">&lt;-</span> <span class="fu">getverticeshr</span>(<span class="fu">getvolumeUD</span>(kuo_indiv), <span class="dv">95</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>shpindiv95<span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(volo_indiv)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(shpindiv95, <span class="at">dsn =</span> <span class="st">"Chemin_ou_je_veux_mettre_mon_Kernel95/Kernel95.shp"</span>, <span class="at">driver =</span> <span class="st">"ESRI Shapefile"</span>)</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>#Calculer le domaine vital à 50% et enregistrer en shapefile</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>volb_indiv &lt;- getverticeshr(getvolumeUD(kuo_indiv), 50)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>shpindiv50&lt;- st_as_sf(volb_indiv)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>st_write(shpindiv50, dsn = "Chemin_ou_je_veux_mettre_mon_Kernel50/Kernel50.shp", driver = "ESRI Shapefile")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculer le domaine vital à 50% et enregistrer en shapefile</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>volb_indiv <span class="ot">&lt;-</span> <span class="fu">getverticeshr</span>(<span class="fu">getvolumeUD</span>(kuo_indiv), <span class="dv">50</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>shpindiv50<span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(volb_indiv)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(shpindiv50, <span class="at">dsn =</span> <span class="st">"Chemin_ou_je_veux_mettre_mon_Kernel50/Kernel50.shp"</span>, <span class="at">driver =</span> <span class="st">"ESRI Shapefile"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="kernel-de-clément" class="level4" data-number="5.3.1.2">
 <h4 data-number="5.3.1.2" class="anchored" data-anchor-id="kernel-de-clément"><span class="header-section-number">5.3.1.2</span> Kernel de Clément</h4>
@@ -362,7 +362,7 @@ window.Quarto = {
 <h3 data-number="5.3.2" class="anchored" data-anchor-id="méthodes-écologiques"><span class="header-section-number">5.3.2</span> Méthodes écologiques</h3>
 <section id="km-linéaire-tampon" class="level4" data-number="5.3.2.1">
 <h4 data-number="5.3.2.1" class="anchored" data-anchor-id="km-linéaire-tampon"><span class="header-section-number">5.3.2.1</span> Km linéaire tampon</h4>
-<p>Pour chaque individus, on coupe l’ensemble des cours d’eau au niveau des localisations extrêmes (la plus en aval ou la plus en amont). On mesure ensuite la distance entre toutes les localisations et le cours d’eau le plus proche (<a href="#fig-distance" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-distance</span></a>).</p>
+<p>Pour chaque individus, on coupe l’ensemble des cours d’eau au niveau des localisations extrêmes (la plus en aval ou la plus en amont). On mesure ensuite la distance entre toutes les localisations et le cours d’eau le plus proche (<a href="#fig-distance" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>).</p>
 <div id="fig-distance" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-distance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -373,7 +373,7 @@ Figure&nbsp;5.1: Distance entre les localisations et le cours d’eau le plus pr
 </figcaption>
 </figure>
 </div>
-<p>On crée ensuite autour des cours d’eau un tampon avec comme valeur la distance maximale entre les localisations et les cours d’eau (<a href="#fig-ehr-simple" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ehr-simple</span></a>). Comme le Vison d’Europe peut utiliser l’ensemble de l’espace compris entre les cours d’eau, on crée également un tampon “rempli” (<a href="#fig-ehr-rempli" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ehr-rempli</span></a>).</p>
+<p>On crée ensuite autour des cours d’eau un tampon avec comme valeur la distance maximale entre les localisations et les cours d’eau (<a href="#fig-ehr-simple" class="quarto-xref">Figure&nbsp;<span>5.2 (a)</span></a>). Comme le Vison d’Europe peut utiliser l’ensemble de l’espace compris entre les cours d’eau, on crée également un tampon “rempli” (<a href="#fig-ehr-rempli" class="quarto-xref">Figure&nbsp;<span>5.2 (b)</span></a>).</p>
 <div id="fig-EHR" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-EHR-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -409,7 +409,28 @@ Figure&nbsp;5.2: Domaine vital écologique basé sur la distance aux cours d’e
 </figcaption>
 </figure>
 </div>
-<p>En ce qui concerne les zones cœurs, on les crée en utilisant l’axe médian de la zone humide. On projette sur cette axe les localisations. On choisit comme localisation de référence une des deux extrêmes. On mesure la longueur par l’axe médian entre le point de référence et chaque projeté. On modélise la courbe de ces distances, du point de référence jusqu’au projeté le plus éloigné. On identifie les zones cœurs comme des zones où un nombre conséquent de localisations forme un plateau. On coupe ensuite le tampon au niveau des limites des plateaux.</p>
+<p>En ce qui concerne les zones cœurs, on les crée en utilisant l’axe médian de la zone humide. On projette sur cette axe les localisations. On choisit comme localisation de référence une des deux extrêmes. On mesure la longueur par l’axe médian entre le point de référence et chaque projeté (<a href="#fig-projete" class="quarto-xref">Figure&nbsp;<span>5.3</span></a>).</p>
+<div id="fig-projete" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="image/projete_watercourse_cut.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.3: Projection de chaque localisation sur l’axe médian de la zone humide.
+</figcaption>
+</figure>
+</div>
+<p>On modélise la courbe de ces distances, du point de référence jusqu’au projeté le plus éloigné. On identifie les zones cœurs comme des zones où un nombre conséquent de localisations forme un plateau. On coupe ensuite le tampon au niveau des limites des plateaux (<a href="#fig-EHR-core-select" class="quarto-xref">Figure&nbsp;<span>5.4</span></a>).</p>
+<div id="fig-EHR-core-select" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-EHR-core-select-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="image/Core_area_EHR_test.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-EHR-core-select-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.4: Simulation d’une courbe de distance à un point de référence, pour la sélection des zones coeurs (entourées en rouge).
+</figcaption>
+</figure>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -433,7 +454,7 @@ Révision de la méthode
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Cette méthode n’est pas aboutit. D’une part, on utilise l’axe médian de la zone humide alors que le domaine vital n’est pas uniquement dans la zone humide. On devrait alors utiliser l’axe médian des cours d’eau. De plus, on coupe les zones cœurs au niveau de l’amont et de l’aval, mais on ne redéfinit pas des limites en s’éloignant du cours d’eau. On devrait, pour les localisations correspondant à un plateau, mesurer la distance maximale aux cours d’eau et refaire un tampon autour d’eux. Qui plus est, la méthode actuelle estime que le vison ne peut pas être plus loin du cours d’eau que la distance maximale alors que rien ne l’en empâche. Il faudrait alors faire un tampon également autour des localisations pour simuler cette possibilité. Enfin, on crée un domaine vital 100% qu’on compare à un Kernel 95% ce qui n’est pas logique. On pourrait prendre comme valeur de tampon la distance représentant 95% de la distance max.</p>
+<p>Cette méthode n’est pas aboutit. D’une part, on utilise l’axe médian de la zone humide alors que le domaine vital n’est pas uniquement dans la zone humide. On devrait alors utiliser l’axe médian des cours d’eau. De plus, on coupe les zones cœurs au niveau de l’amont et de l’aval, mais on ne redéfinit pas des limites en s’éloignant du cours d’eau. On devrait, pour les localisations correspondant à un plateau, mesurer la distance maximale aux cours d’eau et refaire un tampon autour d’eux. Qui plus est, la méthode actuelle estime que le vison ne peut pas être plus loin du cours d’eau que la distance maximale alors que rien ne l’en empêche. Il faudrait alors faire un tampon également autour des localisations pour simuler cette possibilité. Enfin, on crée un domaine vital 100% qu’on compare à un Kernel 95% ce qui n’est pas logique. On pourrait prendre comme valeur de tampon la distance représentant 95% de la distance max.</p>
 </div>
 </div>
 </section>
@@ -446,7 +467,7 @@ Révision de la méthode
 </section>
 <section id="comparaison-des-méthodes" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="comparaison-des-méthodes"><span class="header-section-number">5.4</span> Comparaison des méthodes</h2>
-<p>Les méthodes seront toutes appliquées à notre jeu de données. De plus les déterminismes de la taille du domaine vital seront analysés pour chacune des méthodes. Ainsi il faudra observer si ce sont toujours les mêmes déterminismes qui influencent la taille du domaine vital. De plus, avoir plusieurs méthodes de modélisation du domaine vital permettra aussi d’estimer celui-ci comme un intervalle entre deux surfaces et pas comme une surface “fixe”.</p>
+<p>Les analyses statistiques ont été menées sur R. Elles ont nécessité l’utilisation des packages <code>RVAideMemoire</code>, <code>car</code>, <code>emmeans</code> et <code>lme4</code>.</p>
 
 
 </section>

@@ -37,7 +37,7 @@ Une méthode de modélisation du domaine vital très utilisée est la méthode d
 Les Kernel ont été modélisés sur R en utilisant les packages `sf`,  `sp`, `adehabitatHR` selon ce script : 
 
 
-```` markdown
+``` r
 #Lire le shapefile des points
 pt_indiv <- st_read("Chemin_pour_trouver_ta_couche_de_points/Loc_indiv.shp")
 
@@ -60,7 +60,7 @@ volb_indiv <- getverticeshr(getvolumeUD(kuo_indiv), 50)
 shpindiv50<- st_as_sf(volb_indiv)
 st_write(shpindiv50, dsn = "Chemin_ou_je_veux_mettre_mon_Kernel50/Kernel50.shp", driver = "ESRI Shapefile")
 
-````
+```
 
 
 #### Kernel de Clément
@@ -86,7 +86,13 @@ On crée ensuite autour des cours d'eau un tampon avec comme valeur la distance 
 Domaine vital écologique basé sur la distance aux cours d'eau.
 :::
 
-En ce qui concerne les zones cœurs, on les crée en utilisant l'axe médian de la zone humide. On projette sur cette axe les localisations. On choisit comme localisation de référence une des deux extrêmes. On mesure la longueur par l'axe médian entre le point de référence et chaque projeté. On modélise la courbe de ces distances, du point de référence jusqu'au projeté le plus éloigné. On identifie les zones cœurs comme des zones où un nombre conséquent de localisations forme un plateau. On coupe ensuite le tampon au niveau des limites des plateaux. 
+En ce qui concerne les zones cœurs, on les crée en utilisant l'axe médian de la zone humide. On projette sur cette axe les localisations. On choisit comme localisation de référence une des deux extrêmes. On mesure la longueur par l'axe médian entre le point de référence et chaque projeté (@fig-projete). 
+
+![Projection de chaque localisation sur l'axe médian de la zone humide.](image/projete_watercourse_cut.png){#fig-projete}
+
+On modélise la courbe de ces distances, du point de référence jusqu'au projeté le plus éloigné. On identifie les zones cœurs comme des zones où un nombre conséquent de localisations forme un plateau. On coupe ensuite le tampon au niveau des limites des plateaux (@fig-EHR-core-select). 
+
+![Simulation d'une courbe de distance à un point de référence, pour la sélection des zones coeurs (entourées en rouge).](image/Core_area_EHR_test.png){#fig-EHR-core-select}
 
 :::{.callout-warning}
 ## Problème en zone de marais
@@ -95,7 +101,7 @@ Il y a un problème quant à la construction en zone de marais puisque la zones 
 
 :::{.callout-note}
 ## Révision de la méthode
-Cette méthode n'est pas aboutit. D'une part, on utilise l'axe médian de la zone humide alors que le domaine vital n'est pas uniquement dans la zone humide. On devrait alors utiliser l'axe médian des cours d'eau. De plus, on coupe les zones cœurs au niveau de l'amont et de l'aval, mais on ne redéfinit pas des limites en s'éloignant du cours d'eau. On devrait, pour les localisations correspondant à un plateau, mesurer la distance maximale aux cours d'eau et refaire un tampon autour d'eux. Qui plus est, la méthode actuelle estime que le vison ne peut pas être plus loin du cours d'eau que la distance maximale alors que rien ne l'en empâche. Il faudrait alors faire un tampon également autour des localisations pour simuler cette possibilité. Enfin, on crée un domaine vital 100% qu'on compare à un Kernel 95% ce qui n'est pas logique. On pourrait prendre comme valeur de tampon la distance représentant 95% de la distance max.   
+Cette méthode n'est pas aboutit. D'une part, on utilise l'axe médian de la zone humide alors que le domaine vital n'est pas uniquement dans la zone humide. On devrait alors utiliser l'axe médian des cours d'eau. De plus, on coupe les zones cœurs au niveau de l'amont et de l'aval, mais on ne redéfinit pas des limites en s'éloignant du cours d'eau. On devrait, pour les localisations correspondant à un plateau, mesurer la distance maximale aux cours d'eau et refaire un tampon autour d'eux. Qui plus est, la méthode actuelle estime que le vison ne peut pas être plus loin du cours d'eau que la distance maximale alors que rien ne l'en empêche. Il faudrait alors faire un tampon également autour des localisations pour simuler cette possibilité. Enfin, on crée un domaine vital 100% qu'on compare à un Kernel 95% ce qui n'est pas logique. On pourrait prendre comme valeur de tampon la distance représentant 95% de la distance max.   
 :::
 
 #### Domaine vital maille
@@ -106,4 +112,4 @@ La zone cœur est ensuite définit comme une zone dans laquelle il y a statistiq
 
 ## Comparaison des méthodes
 
-Les méthodes seront toutes appliquées à notre jeu de données. De plus les déterminismes de la taille du domaine vital seront analysés pour chacune des méthodes. Ainsi il faudra observer si ce sont toujours les mêmes déterminismes qui influencent la taille du domaine vital. De plus, avoir plusieurs méthodes de modélisation du domaine vital permettra aussi d'estimer celui-ci comme un intervalle entre deux surfaces et pas comme une surface "fixe".  
+Les analyses statistiques ont été menées sur R. Elles ont nécessité l'utilisation des packages `RVAideMemoire`,  `car`, `emmeans` et `lme4`. 
